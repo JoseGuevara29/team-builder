@@ -3,49 +3,50 @@ import styled from "styled-components";
 
 export default function TeamForm(props) {
   //   console.log(props.teamMember.email);
+  const { values, update, submit } = props;
+
+  const onChange = (evt) => {
+    const { name, value } = evt.target;
+    update(name, value);
+  };
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+
+    submit();
+  };
   return (
-    <FormStyled className="form-container">
+    <FormStyled className="form-container" onSubmit={onSubmit}>
       <DivInputStyled calssName="form-inputs">
         <LabelStyled>
           Username
           <input
             type="text"
-            // value={values.username}
+            value={values.username}
             placeholder="Username"
-            name="usename"
+            name="username"
             maxLength="30"
-            // onChange={onChange}
+            onChange={onChange}
           />
         </LabelStyled>
         <LabelStyled>
           Email
           <input
             type="email"
-            // value={values.email}
+            value={values.email}
             placeholder="Email"
             name="email"
             maxLength="50"
-            // onChange={onChange}
+            onChange={onChange}
           />
         </LabelStyled>
         <LabelStyled>
           Role
-          {/* onChange={onChange} value={values.role} */}
-          <select name="role">
+          <select name="role" onChange={onChange} value={values.role}>
+            <option>Select one</option>
             <option>Frontend Developer</option>
             <option>Backend Developer</option>
             <option>Full Stack Defveloper</option>
           </select>
-        </LabelStyled>
-        <LabelStyled>
-          Salary
-          <input
-            type="number"
-            // value={values.email}
-            placeholder="Amount per year"
-            name="salary"
-            // onChange={onChange}
-          />
         </LabelStyled>
         <SubmitDivStyled>
           <button className="submit">Submit</button>
